@@ -1,0 +1,48 @@
+
+/* Class = "NSMenuItem"; title = "SMBIOSTransporter"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "SMBIOSTransporter";
+
+/* Class = "NSMenuItem"; title = "Quit SMBIOSTransporter"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "Quit SMBIOSTransporter";
+
+/* Class = "NSMenuItem"; title = "About SMBIOSTransporter"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "About SMBIOSTransporter";
+
+/* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
+"AYu-sK-qS6.title" = "Main Menu";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
+"BOF-NM-1cW.title" = "Preferences…";
+
+/* Class = "NSTextFieldCell"; title = "MLB:"; ObjectID = "IOO-c6-DC6"; */
+"IOO-c6-DC6.title" = "MLB:";
+
+/* Class = "NSWindow"; title = "三码转换"; ObjectID = "IQv-IB-iLA"; */
+"IQv-IB-iLA.title" = "SMBIOSTtransporter";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
+"Kd2-mp-pUS.title" = "Show All";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
+"NMo-om-nkz.title" = "Services";
+
+/* Class = "NSMenuItem"; title = "Hide SMBIOSTransporter"; ObjectID = "Olw-nP-bQN"; */
+"Olw-nP-bQN.title" = "Hide SMBIOSTransporter";
+
+/* Class = "NSButtonCell"; title = "转换"; ObjectID = "P4n-pQ-vdk"; */
+"P4n-pQ-vdk.title" = "Run";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
+"Vdr-fp-XzO.title" = "Hide Others";
+
+/* Class = "NSTextFieldCell"; title = "ROM:"; ObjectID = "YFR-Jw-GYK"; */
+"YFR-Jw-GYK.title" = "ROM:";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
+"hz9-B4-Xy5.title" = "Services";
+
+/* Class = "NSTextFieldCell"; title = "SerialNumber:"; ObjectID = "oMb-Nq-0Lt"; */
+"oMb-Nq-0Lt.title" = "SerialNumber:";
+
+/* Class = "NSMenu"; title = "SMBIOSTransporter"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "SMBIOSTransporter";

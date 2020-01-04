@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Application-->
+        <scene sceneID="JPo-4y-FX3">
+            <objects>
+                <application id="hnw-xV-0zn" sceneMemberID="viewController">
+                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
+                        <items>
+                            <menuItem title="SMBIOSTransporter" id="1Xt-HY-uBw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="SMBIOSTransporter" systemMenu="apple" id="uQy-DD-JDr">
+                                    <items>
+                                        <menuItem title="About SMBIOSTransporter" id="5kV-Vb-QxS">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
+                                        <menuItem title="Services" id="NMo-om-nkz">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
+                                        <menuItem title="Hide SMBIOSTransporter" keyEquivalent="h" id="Olw-nP-bQN">
+                                            <connections>
+                                                <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Hide Others" keyEquivalent="h" id="Vdr-fp-XzO">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="hideOtherApplications:" target="Ady-hI-5gd" id="VT4-aY-XCT"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Show All" id="Kd2-mp-pUS">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="unhideAllApplications:" target="Ady-hI-5gd" id="Dhg-Le-xox"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
+                                        <menuItem title="Quit SMBIOSTransporter" keyEquivalent="q" id="4sb-4s-VLi">
+                                            <connections>
+                                                <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                    </connections>
+                </application>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate"/>
+                <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+                <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="0.0"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="R2V-B0-nI4">
+            <objects>
+                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                    <window key="window" title="三码转换" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                    </connections>
+                </windowController>
+                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="250"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hIz-AP-VOD">
+            <objects>
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" id="m2S-Jp-Qdl">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f1K-cM-lf4">
+                                <rect key="frame" x="323" y="112" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="Zmo-Hq-p5C"/>
+                                    <constraint firstAttribute="height" constant="120" id="kSr-8f-Zbq"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon-addpic" id="SRw-cY-QBr"/>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zTB-E2-UZm">
+                                <rect key="frame" x="37" y="112" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="CQq-KU-0m5"/>
+                                    <constraint firstAttribute="height" constant="120" id="fm3-ah-ff1"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon-addpic" id="FfZ-Cc-9vV"/>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8v1-gN-jl2">
+                                <rect key="frame" x="353" y="142" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="NPC-gy-Sbq"/>
+                                    <constraint firstAttribute="height" constant="60" id="aV1-a7-pwM"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="BHB-B4-VXl"/>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rEV-L2-URK">
+                                <rect key="frame" x="66" y="142" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Kls-Jf-5ja"/>
+                                    <constraint firstAttribute="width" constant="60" id="PzV-NF-6aV"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="nId-x1-gWx"/>
+                            </imageView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JpH-PA-sU1">
+                                <rect key="frame" x="382" y="18" width="67" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="NCP-xh-3OO"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="转换" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="P4n-pQ-vdk">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="runAction:" target="XfG-lQ-9wD" id="Ixr-Cg-jJb"/>
+                                </connections>
+                            </button>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="l2e-w1-jci" customClass="HKDragView">
+                                <rect key="frame" x="37" y="112" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="kPx-91-mne"/>
+                                    <constraint firstAttribute="width" constant="120" id="tL4-uG-9IH"/>
+                                </constraints>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="GIe-Bf-Qg3" customClass="HKDragView">
+                                <rect key="frame" x="323" y="112" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="7xn-vi-VRM"/>
+                                    <constraint firstAttribute="height" constant="120" id="SUG-FH-F99"/>
+                                </constraints>
+                            </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="L4k-PN-HsT">
+                                <rect key="frame" x="35" y="73" width="35" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="oIS-NK-pw2"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="MLB:" id="IOO-c6-DC6">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SOc-uC-J1A">
+                                <rect key="frame" x="35" y="49" width="38" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="IIc-eZ-mRV"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="ROM:" id="YFR-Jw-GYK">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dwD-wW-iRK">
+                                <rect key="frame" x="35" y="25" width="91" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="1Cb-wK-rCh"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="SerialNumber:" id="oMb-Nq-0Lt">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yGa-iF-CMz">
+                                <rect key="frame" x="208" y="140" width="64" height="64"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="arrow-right" id="ixR-DP-TfW"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="zTB-E2-UZm" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="37" id="0QZ-O9-wzT"/>
+                            <constraint firstAttribute="trailing" secondItem="f1K-cM-lf4" secondAttribute="trailing" constant="37" id="26n-6K-jaZ"/>
+                            <constraint firstAttribute="bottom" secondItem="dwD-wW-iRK" secondAttribute="bottom" constant="25" id="3yu-6Z-i1h"/>
+                            <constraint firstItem="dwD-wW-iRK" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="37" id="564-GT-6jt"/>
+                            <constraint firstItem="dwD-wW-iRK" firstAttribute="top" secondItem="SOc-uC-J1A" secondAttribute="bottom" constant="8" id="60g-kE-nm6"/>
+                            <constraint firstAttribute="trailing" secondItem="GIe-Bf-Qg3" secondAttribute="trailing" constant="37" id="7Pp-L7-5fM"/>
+                            <constraint firstAttribute="trailing" secondItem="8v1-gN-jl2" secondAttribute="trailing" constant="67" id="ALV-C0-vUR"/>
+                            <constraint firstItem="yGa-iF-CMz" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="AlZ-xW-f3Y"/>
+                            <constraint firstItem="JpH-PA-sU1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dwD-wW-iRK" secondAttribute="trailing" constant="8" symbolic="YES" id="BmN-1N-xI6"/>
+                            <constraint firstItem="GIe-Bf-Qg3" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="38" id="HRd-BZ-bc7"/>
+                            <constraint firstItem="rEV-L2-URK" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="66" id="K6M-Q2-Beu"/>
+                            <constraint firstItem="L4k-PN-HsT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zTB-E2-UZm" secondAttribute="bottom" constant="23" id="L66-RY-if3"/>
+                            <constraint firstAttribute="trailing" secondItem="JpH-PA-sU1" secondAttribute="trailing" constant="37" id="Prj-75-htL"/>
+                            <constraint firstItem="8v1-gN-jl2" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="68" id="VZh-Pt-IGI"/>
+                            <constraint firstItem="L4k-PN-HsT" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="37" id="Voi-c7-Vkb"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="L4k-PN-HsT" secondAttribute="trailing" constant="20" symbolic="YES" id="WQT-Qd-BVP"/>
+                            <constraint firstItem="f1K-cM-lf4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yGa-iF-CMz" secondAttribute="trailing" constant="51" id="cXV-5n-TGD"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SOc-uC-J1A" secondAttribute="trailing" constant="20" symbolic="YES" id="d5r-Ho-hcP"/>
+                            <constraint firstItem="f1K-cM-lf4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="38" id="dAF-cU-88e"/>
+                            <constraint firstItem="SOc-uC-J1A" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="37" id="gkC-AX-XnY"/>
+                            <constraint firstItem="l2e-w1-jci" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="38" id="gzG-aj-raq"/>
+                            <constraint firstItem="l2e-w1-jci" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="37" id="hec-fd-Ja8"/>
+                            <constraint firstItem="yGa-iF-CMz" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="66" id="m5J-To-8dC"/>
+                            <constraint firstItem="SOc-uC-J1A" firstAttribute="top" secondItem="L4k-PN-HsT" secondAttribute="bottom" constant="8" id="qEz-RN-syr"/>
+                            <constraint firstAttribute="bottom" secondItem="JpH-PA-sU1" secondAttribute="bottom" constant="25" id="rEP-dR-Oid"/>
+                            <constraint firstItem="yGa-iF-CMz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zTB-E2-UZm" secondAttribute="trailing" constant="51" id="tgG-hv-WHX"/>
+                            <constraint firstItem="rEV-L2-URK" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="68" id="tui-Os-XYz"/>
+                            <constraint firstItem="zTB-E2-UZm" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="38" id="v1O-kD-d9F"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="MLBLabel" destination="L4k-PN-HsT" id="vna-Dw-xMl"/>
+                        <outlet property="ROMLabel" destination="SOc-uC-J1A" id="7cq-XL-BFf"/>
+                        <outlet property="SNLabel" destination="dwD-wW-iRK" id="Ryn-Ea-23J"/>
+                        <outlet property="bgImageViewCL" destination="zTB-E2-UZm" id="anq-YC-bEu"/>
+                        <outlet property="bgImageViewOC" destination="f1K-cM-lf4" id="Mlr-wU-qCL"/>
+                        <outlet property="drapDropImageViewCL" destination="l2e-w1-jci" id="rj5-MK-bt8"/>
+                        <outlet property="drapDropImageViewOC" destination="GIe-Bf-Qg3" id="u9h-LN-dGE"/>
+                        <outlet property="runBtn" destination="JpH-PA-sU1" id="C3M-KP-71r"/>
+                        <outlet property="typeImageViewCL" destination="rEV-L2-URK" id="6kl-q2-s6m"/>
+                        <outlet property="typeImageViewOC" destination="8v1-gN-jl2" id="Jcg-We-amA"/>
+                    </connections>
+                </viewController>
+                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="655"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="arrow-right" width="32" height="32"/>
+        <image name="icon-addpic" width="120" height="120"/>
+    </resources>
+</document>
