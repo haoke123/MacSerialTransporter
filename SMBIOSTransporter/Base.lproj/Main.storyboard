@@ -11,11 +11,11 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="SMBIOSTransporter" id="1Xt-HY-uBw">
+                            <menuItem title="MacSerialTransporter" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="SMBIOSTransporter" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="MacSerialTransporter" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About SMBIOSTransporter" id="5kV-Vb-QxS">
+                                        <menuItem title="About MacSerialTransporter" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
@@ -29,7 +29,7 @@
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide SMBIOSTransporter" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide MacSerialTransporter" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -47,7 +47,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit SMBIOSTransporter" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit MacSerialTransporter" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -135,7 +135,7 @@
                                 </constraints>
                                 <buttonCell key="cell" type="push" title="转换" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="P4n-pQ-vdk">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="titleBar"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="runAction:" target="XfG-lQ-9wD" id="Ixr-Cg-jJb"/>
@@ -161,7 +161,7 @@
                                     <constraint firstAttribute="height" constant="16" id="oIS-NK-pw2"/>
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="MLB:" id="IOO-c6-DC6">
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="titleBar"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -172,7 +172,7 @@
                                     <constraint firstAttribute="height" constant="16" id="IIc-eZ-mRV"/>
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="ROM:" id="YFR-Jw-GYK">
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="titleBar"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -183,13 +183,13 @@
                                     <constraint firstAttribute="height" constant="16" id="1Cb-wK-rCh"/>
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="SerialNumber:" id="oMb-Nq-0Lt">
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="titleBar"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yGa-iF-CMz">
-                                <rect key="frame" x="208" y="194" width="64" height="64"/>
+                                <rect key="frame" x="224" y="226" width="32" height="32"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="arrow-right" id="ixR-DP-TfW"/>
                             </imageView>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="psR-cc-7KB">
