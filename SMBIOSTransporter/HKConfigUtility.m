@@ -8,15 +8,20 @@
 
 #import "HKConfigUtility.h"
 #import "SMBIOSKey_F.h"
+#import "HKIORegPropertyTool.h"
 @implementation HKConfigUtility
 - (instancetype)initWithURL:(NSURL *) URL{
     self = [super init];
     if(self){
-        _URL = URL;
-        _type = [self checkConfigType:URL];
-        _data = [NSDictionary dictionaryWithContentsOfURL:URL];
-        [self setupSMBIOSCode];
-        
+        if(URL){
+            _URL = URL;
+            _type = [self checkConfigType:URL];
+            _data = [NSDictionary dictionaryWithContentsOfURL:URL];
+            [self setupSMBIOSCode];
+        }else{
+            [self updateSystemInfo];
+            _desString = @"<本机>";
+        }
     }
     return self;
 }
@@ -26,6 +31,7 @@
     return arr.lastObject;
 }
 - (ConfigType)checkConfigType:(NSURL *) configURL{
+    
     NSDictionary * dict = [NSDictionary dictionaryWithContentsOfURL:configURL];
     if(dict == nil){
         return ConfigTypeError;
@@ -49,7 +55,7 @@
        
         _MLB = [_data[kSMBIOS] objectForKey:kBoardSerialNumber];
         _ROM = [_data[kRtVariables] objectForKey:kROM];
-        _ROMValue = [self HexStringWithData:_ROM];
+        _ROMValue = [_ROM stringValue];
         _SerialNumber = [_data[kSMBIOS] objectForKey:kSerialNumber];
         _CustomUUID = [_data[kSystemParameters] objectForKey:kCustomUUID];
         return YES;
@@ -59,7 +65,7 @@
         NSDictionary * Generic  = [platform objectForKey:kGeneric];
         _MLB = [Generic objectForKey:kMLB];
         _ROM = [Generic objectForKey:kROM];
-        _ROMValue = [self HexStringWithData:_ROM];
+        _ROMValue = [_ROM stringValue];
         _SerialNumber = [Generic objectForKey:kSystemSerialNumber];;
         _CustomUUID   = [Generic objectForKey:kSystemUUID];
         return YES;
@@ -73,7 +79,7 @@
         NSMutableDictionary * RtVariablesDict = [oData objectForKey:kRtVariables];
         [RtVariablesDict setObject:config.ROM forKey:kROM];
         NSMutableDictionary * SMBIOSDict = [oData objectForKey:kSMBIOS];
-        [SMBIOSDict setObject:config.SerialNumber forKey:kSystemSerialNumber];
+        [SMBIOSDict setObject:config.SerialNumber forKey:kSerialNumber];
         [SMBIOSDict setObject:config.MLB forKey:kBoardSerialNumber];
         NSMutableDictionary * SystemParameters = [oData objectForKey:kSystemParameters];
         [SystemParameters setObject:config.CustomUUID forKey:kCustomUUID];
@@ -98,10 +104,62 @@
         
     }
 }
-- (NSString *)HexStringWithData:(NSData *)data{
-    Byte *bytes = (Byte *)[data bytes];
+- (void)updateSystemInfo
+{
+
+    NSMutableDictionary *platformDictionary;
+
+    if (getIORegProperties(@"IODeviceTree:/", &platformDictionary))
+    {
+        NSString * serialNumber = properyToString([platformDictionary objectForKey:@"IOPlatformSerialNumber"]);
+
+        _SerialNumber = serialNumber;
+
+    }
+
+    NSMutableDictionary *efiPlatformDictionary;
+
+    if (getIORegProperties(@"IODeviceTree:/efi/platform", &efiPlatformDictionary))
+    {
+        NSMutableData *systemIDData = [efiPlatformDictionary objectForKey:@"system-id"];
+        NSString * system_id = [systemIDData stringValue];
+        _CustomUUID = system_id;
+
+    }
+    CFTypeRef property = nil;
+
+    if (getIORegProperty(@"IODeviceTree:/options", @"4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:ROM", &property))
+    {
+        NSData *valueData = (__bridge NSData *)property;
+
+        NSString * romValue = [valueData stringValue];
+
+        _ROM = valueData;
+        _ROMValue =romValue;
+        CFRelease(property);
+    }
+
+    if (getIORegProperty(@"IODeviceTree:/options", @"4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14:MLB", &property))
+    {
+        NSData *valueData = (__bridge NSData *)property;
+        NSString *valueString = [[NSString alloc] initWithData:valueData encoding:NSASCIIStringEncoding];
+        _MLB = valueString;
+        CFRelease(property);
+    }
+    if(_MLB && _ROM && _SerialNumber && _CustomUUID){
+        _type = ConfigTypeLocal;
+    }else{
+        _type = ConfigTypeError;
+    }
+        
+}
+
+@end
+@implementation NSData (StringValue)
+- (NSString *)stringValue{
+    Byte *bytes = (Byte *)[self bytes];
     NSString *hexStr=@"";
-    for(int i=0;i<[data length];i++) {
+    for(int i=0;i<[self length];i++) {
         NSString *newHexStr = [NSString stringWithFormat:@"%x",bytes[i]&0xff];///16进制数
         if([newHexStr length]==1){
             hexStr = [NSString stringWithFormat:@"%@0%@",hexStr,newHexStr];
@@ -114,3 +172,4 @@
     return hexStr;
 }
 @end
+

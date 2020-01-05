@@ -15,6 +15,7 @@
 		7A03AA9523BE9923007E9800 /* HKDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A03AA9423BE9923007E9800 /* HKDragView.m */; };
 		7A2F337A23C0813400CF4288 /* SMBIOSKey_F.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2F337823C0813400CF4288 /* SMBIOSKey_F.m */; };
 		7A2F337D23C081F900CF4288 /* HKConfigUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2F337C23C081F900CF4288 /* HKConfigUtility.m */; };
+		7ACAC8F423C2661300D406FF /* HKIORegPropertyTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACAC8F223C2661200D406FF /* HKIORegPropertyTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,8 @@
 		7A2F337C23C081F900CF4288 /* HKConfigUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HKConfigUtility.m; sourceTree = "<group>"; };
 		7A2F338123C0C93700CF4288 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		7A2F338223C0C9CD00CF4288 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Main.strings"; sourceTree = "<group>"; };
+		7ACAC8F223C2661200D406FF /* HKIORegPropertyTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKIORegPropertyTool.m; sourceTree = "<group>"; };
+		7ACAC8F323C2661200D406FF /* HKIORegPropertyTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKIORegPropertyTool.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +81,8 @@
 				7A2F337C23C081F900CF4288 /* HKConfigUtility.m */,
 				7A2F337923C0813400CF4288 /* SMBIOSKey_F.h */,
 				7A2F337823C0813400CF4288 /* SMBIOSKey_F.m */,
+				7ACAC8F323C2661200D406FF /* HKIORegPropertyTool.h */,
+				7ACAC8F223C2661200D406FF /* HKIORegPropertyTool.m */,
 				7A03AA8523BE976A007E9800 /* Assets.xcassets */,
 				7A03AA8723BE976A007E9800 /* Main.storyboard */,
 				7A03AA8A23BE976A007E9800 /* Info.plist */,
@@ -164,6 +169,7 @@
 				7A2F337D23C081F900CF4288 /* HKConfigUtility.m in Sources */,
 				7A03AA8123BE9769007E9800 /* AppDelegate.m in Sources */,
 				7A03AA9523BE9923007E9800 /* HKDragView.m in Sources */,
+				7ACAC8F423C2661300D406FF /* HKIORegPropertyTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

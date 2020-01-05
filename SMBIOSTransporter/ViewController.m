@@ -10,20 +10,24 @@
 #import "HKDragView.h"
 #import "SMBIOSKey_F.h"
 #import "HKConfigUtility.h"
-
+#import "HKIORegPropertyTool.h"
+#include <IOKit/IOBSD.h>
+#include <IOKit/IOKitLib.h>
 @interface ViewController ()<HKDragViewDelegate,NSWindowDelegate>
-@property (nonatomic,weak) IBOutlet HKDragView * drapDropImageViewCL;
-@property (nonatomic,weak) IBOutlet HKDragView * drapDropImageViewOC;
-@property (weak) IBOutlet NSButton *runBtn;
+@property (nonatomic,weak) IBOutlet HKDragView  * drapDropImageViewCL;
+@property (nonatomic,weak) IBOutlet HKDragView  * drapDropImageViewOC;
+@property (nonatomic,weak) IBOutlet NSButton    * runBtn;
+@property (nonatomic,weak) IBOutlet NSImageView * bgImageViewCL;
+@property (nonatomic,weak) IBOutlet NSImageView * bgImageViewOC;
+@property (nonatomic,weak) IBOutlet NSImageView * typeImageViewOC;
+@property (nonatomic,weak) IBOutlet NSImageView * typeImageViewCL;
+@property (nonatomic,weak) IBOutlet NSTextField * MLBLabel;
+@property (nonatomic,weak) IBOutlet NSTextField * ROMLabel;
+@property (nonatomic,weak) IBOutlet NSTextField * SNLabel;
 @property (nonatomic,strong) HKConfigUtility * oConfig;
 @property (nonatomic,strong) HKConfigUtility * cConfig;
-@property (weak) IBOutlet NSImageView *bgImageViewCL;
-@property (weak) IBOutlet NSImageView *bgImageViewOC;
-@property (weak) IBOutlet NSImageView *typeImageViewOC;
-@property (weak) IBOutlet NSImageView *typeImageViewCL;
-@property (weak) IBOutlet NSTextField *MLBLabel;
-@property (weak) IBOutlet NSTextField *ROMLabel;
-@property (weak) IBOutlet NSTextField *SNLabel;
+@property (nonatomic,strong) HKConfigUtility * localConfig;
+@property (weak) IBOutlet NSSegmentedControl *segment;
 @end
 
 @implementation ViewController
@@ -34,18 +38,59 @@
     [self.drapDropImageViewOC setType:1];
     [self.drapDropImageViewCL setDelegate:self];
     [self.drapDropImageViewOC setDelegate:self];
+    self.localConfig = [[HKConfigUtility alloc] initWithURL:nil];
+    if(self.localConfig.type == ConfigTypeLocal){
+        [self dragviewDidGetFileWithURL:nil withType:0];
+        [self.segment setAction:@selector(segmentChangeValue:)];
+    }else{
+        [self.segment setHidden:YES];
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reopen) name:@"reopen" object:nil];
-    // Do any additional setup after loading the view.
 }
-- (void) dragviewDidGetFileWithURL:(NSURL *)url withType:(NSInteger)type{
-    HKConfigUtility * config = [[HKConfigUtility alloc] initWithURL:url];
+- (void) segmentChangeValue:(NSSegmentedControl *) seg{
+    NSImageView * dgView = self.typeImageViewCL;
+    if(seg.selectedSegment == 0){
+      [dgView setImage:[NSImage imageNamed:@"icon-local"]];
+        [self changeTextWithConfig:self.localConfig];
+    }else{
+        if(self.cConfig){
+            if(self.cConfig.type == ConfigTypeClover){
+                [dgView setImage:[NSImage imageNamed:@"icon-clover"]];
+            }else if (self.cConfig.type == ConfigTypeOpenCore){
+                [dgView setImage:[NSImage imageNamed:@"icon-opencore"]];
+            }else{
+                [dgView setImage:[NSImage imageNamed:@"icon-local"]];
+            }
+            
+        }else{
+            [dgView setImage:nil];
+            
+        }
+        [self changeTextWithConfig:self.cConfig];
+    }
+}
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)dragviewDidGetFileWithURL:(NSURL * ) url withType:(NSInteger)type{
+    HKConfigUtility * config = nil;
+    if(url){
+       config = [[HKConfigUtility alloc] initWithURL:url];
+        
+    }else{
+        [self segmentChangeValue:self.segment];
+        [self changeTextWithConfig:self.localConfig];
+        [self.segment setSelectedSegment:0];
+        [self.typeImageViewCL setImage:[NSImage imageNamed:@"icon-local"]];
+        return;
+    }
+     
     NSImageView * dgView = nil;
     if(type == 0){
         self.cConfig = config;
         dgView = self.typeImageViewCL;
-        self.MLBLabel.stringValue = [NSString stringWithFormat:@"MLB:%@",config.MLB];
-        self.ROMLabel.stringValue = [NSString stringWithFormat:@"ROM:%@",config.ROMValue];
-        self.SNLabel.stringValue = [NSString stringWithFormat:@"SerialNumber:%@",config.SerialNumber];
+        [self.segment setSelectedSegment:1];
+        [self changeTextWithConfig:config];
 
     }else if (type == 1){
         self.oConfig = config;
@@ -63,21 +108,49 @@
         [dgView setImage:nil];
     }
 }
+- (void)changeTextWithConfig:(HKConfigUtility *) config{
+    self.MLBLabel.stringValue = [NSString stringWithFormat:@"MLB: %@",config.MLB?:@" <xxxxxxxxxxxxx>"];
+    self.ROMLabel.stringValue = [NSString stringWithFormat:@"ROM: %@",config.ROMValue?:@" <xxxxxxxxxxxx>"];
+    self.SNLabel.stringValue = [NSString stringWithFormat:@"SerialNumber: %@",config.SerialNumber?:@"<xxxxxxxxxxxx>"];
+}
 - (void)reopen{
     [self.view.window makeKeyAndOrderFront:self];
 }
 
 - (IBAction)runAction:(NSButton *)sender {
+    
+    NSString * alertMsg = nil;
+
+    if(self.localConfig.type == ConfigTypeError && self.segment.selectedSegment == 0){
+        alertMsg = @"本机三码不正确，请选择可配置文件";
+        [self alertMsgWithTitle:@"操作错误" andMsg:alertMsg];
+        return;
+    }
+    if(self.segment.selectedSegment == 1 && (self.cConfig.type != ConfigTypeClover && self.cConfig.type != ConfigTypeOpenCore)){
+        alertMsg = @"请选择正确的源配置文件";
+        [self alertMsgWithTitle:@"操作错误" andMsg:alertMsg];
+        return;
+    }
+    if(self.oConfig == nil){
+        alertMsg = @"请选择目标文件";
+        [self alertMsgWithTitle:@"操作错误" andMsg:alertMsg];
+        return;
+    }
     __weak typeof(self) weakself = self;
-    [self.oConfig changeSMBIOSCodeWithConfig:self.cConfig withCompleteHandler:^(BOOL isSuccess) {
+    
+    [self.oConfig changeSMBIOSCodeWithConfig:self.segment.selectedSegment? self.cConfig:self.localConfig withCompleteHandler:^(BOOL isSuccess) {
         NSLog(@"转移成功：%@",isSuccess?@"是":@"否");
-        NSAlert * alert = [[NSAlert alloc] init];
-        alert.messageText = @"三码复制成功";
-        [alert addButtonWithTitle:@"确定"];
-        [alert setInformativeText:[NSString stringWithFormat:@"三码已从%@复制到%@",weakself.cConfig.desString,weakself.oConfig.desString]];
-        [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
-            
-        }];
+        [weakself alertMsgWithTitle:@"三码复制成功" andMsg:[NSString stringWithFormat:@"三码已从%@复制到%@",weakself.segment.selectedSegment? weakself.cConfig.desString:weakself.localConfig.desString,weakself.oConfig.desString]];
+
+        
+    }];
+}
+- (void)alertMsgWithTitle:(NSString *) alertTitle andMsg:(NSString *) alertMsg{
+    NSAlert * alert = [[NSAlert alloc] init];
+    alert.messageText = alertTitle;
+    [alert addButtonWithTitle:@"确定"];
+    [alert setInformativeText:alertMsg];
+    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
         
     }];
 }
@@ -87,5 +160,5 @@
     // Update the view, if already loaded.
 }
 
-
 @end
+

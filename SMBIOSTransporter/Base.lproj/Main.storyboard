@@ -93,11 +93,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="324"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f1K-cM-lf4">
-                                <rect key="frame" x="323" y="112" width="120" height="120"/>
+                                <rect key="frame" x="323" y="166" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="Zmo-Hq-p5C"/>
                                     <constraint firstAttribute="height" constant="120" id="kSr-8f-Zbq"/>
@@ -105,7 +105,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon-addpic" id="SRw-cY-QBr"/>
                             </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zTB-E2-UZm">
-                                <rect key="frame" x="37" y="112" width="120" height="120"/>
+                                <rect key="frame" x="37" y="166" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="CQq-KU-0m5"/>
                                     <constraint firstAttribute="height" constant="120" id="fm3-ah-ff1"/>
@@ -113,7 +113,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="icon-addpic" id="FfZ-Cc-9vV"/>
                             </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8v1-gN-jl2">
-                                <rect key="frame" x="353" y="142" width="60" height="60"/>
+                                <rect key="frame" x="353" y="196" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="NPC-gy-Sbq"/>
                                     <constraint firstAttribute="height" constant="60" id="aV1-a7-pwM"/>
@@ -121,7 +121,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="BHB-B4-VXl"/>
                             </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rEV-L2-URK">
-                                <rect key="frame" x="66" y="142" width="60" height="60"/>
+                                <rect key="frame" x="66" y="196" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Kls-Jf-5ja"/>
                                     <constraint firstAttribute="width" constant="60" id="PzV-NF-6aV"/>
@@ -142,14 +142,14 @@
                                 </connections>
                             </button>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="l2e-w1-jci" customClass="HKDragView">
-                                <rect key="frame" x="37" y="112" width="120" height="120"/>
+                                <rect key="frame" x="37" y="166" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="kPx-91-mne"/>
                                     <constraint firstAttribute="width" constant="120" id="tL4-uG-9IH"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="GIe-Bf-Qg3" customClass="HKDragView">
-                                <rect key="frame" x="323" y="112" width="120" height="120"/>
+                                <rect key="frame" x="323" y="166" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="7xn-vi-VRM"/>
                                     <constraint firstAttribute="height" constant="120" id="SUG-FH-F99"/>
@@ -189,9 +189,23 @@
                                 </textFieldCell>
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yGa-iF-CMz">
-                                <rect key="frame" x="208" y="140" width="64" height="64"/>
+                                <rect key="frame" x="208" y="194" width="64" height="64"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="arrow-right" id="ixR-DP-TfW"/>
                             </imageView>
+                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="psR-cc-7KB">
+                                <rect key="frame" x="35" y="129" width="71" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="67" id="9AM-Ql-79m"/>
+                                    <constraint firstAttribute="height" constant="21" id="bdZ-aK-frM"/>
+                                </constraints>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="1yv-MF-p1i">
+                                    <font key="font" metaFont="label" size="11"/>
+                                    <segments>
+                                        <segment label="本机" width="32"/>
+                                        <segment label="文件" imageScaling="proportionallyUpOrDown" width="32" selected="YES" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                            </segmentedControl>
                         </subviews>
                         <constraints>
                             <constraint firstItem="zTB-E2-UZm" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="37" id="0QZ-O9-wzT"/>
@@ -199,17 +213,19 @@
                             <constraint firstAttribute="bottom" secondItem="dwD-wW-iRK" secondAttribute="bottom" constant="25" id="3yu-6Z-i1h"/>
                             <constraint firstItem="dwD-wW-iRK" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="37" id="564-GT-6jt"/>
                             <constraint firstItem="dwD-wW-iRK" firstAttribute="top" secondItem="SOc-uC-J1A" secondAttribute="bottom" constant="8" id="60g-kE-nm6"/>
+                            <constraint firstItem="L4k-PN-HsT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="psR-cc-7KB" secondAttribute="bottom" constant="42" id="6DB-Ae-tx2"/>
                             <constraint firstAttribute="trailing" secondItem="GIe-Bf-Qg3" secondAttribute="trailing" constant="37" id="7Pp-L7-5fM"/>
                             <constraint firstAttribute="trailing" secondItem="8v1-gN-jl2" secondAttribute="trailing" constant="67" id="ALV-C0-vUR"/>
                             <constraint firstItem="yGa-iF-CMz" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="AlZ-xW-f3Y"/>
                             <constraint firstItem="JpH-PA-sU1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dwD-wW-iRK" secondAttribute="trailing" constant="8" symbolic="YES" id="BmN-1N-xI6"/>
+                            <constraint firstItem="psR-cc-7KB" firstAttribute="top" secondItem="zTB-E2-UZm" secondAttribute="bottom" constant="14" id="HB1-So-74G"/>
                             <constraint firstItem="GIe-Bf-Qg3" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="38" id="HRd-BZ-bc7"/>
                             <constraint firstItem="rEV-L2-URK" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="66" id="K6M-Q2-Beu"/>
-                            <constraint firstItem="L4k-PN-HsT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zTB-E2-UZm" secondAttribute="bottom" constant="23" id="L66-RY-if3"/>
                             <constraint firstAttribute="trailing" secondItem="JpH-PA-sU1" secondAttribute="trailing" constant="37" id="Prj-75-htL"/>
                             <constraint firstItem="8v1-gN-jl2" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="68" id="VZh-Pt-IGI"/>
                             <constraint firstItem="L4k-PN-HsT" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="37" id="Voi-c7-Vkb"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="L4k-PN-HsT" secondAttribute="trailing" constant="20" symbolic="YES" id="WQT-Qd-BVP"/>
+                            <constraint firstItem="psR-cc-7KB" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="37" id="c9X-NM-2ok"/>
                             <constraint firstItem="f1K-cM-lf4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yGa-iF-CMz" secondAttribute="trailing" constant="51" id="cXV-5n-TGD"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SOc-uC-J1A" secondAttribute="trailing" constant="20" symbolic="YES" id="d5r-Ho-hcP"/>
                             <constraint firstItem="f1K-cM-lf4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="38" id="dAF-cU-88e"/>
@@ -233,13 +249,14 @@
                         <outlet property="drapDropImageViewCL" destination="l2e-w1-jci" id="rj5-MK-bt8"/>
                         <outlet property="drapDropImageViewOC" destination="GIe-Bf-Qg3" id="u9h-LN-dGE"/>
                         <outlet property="runBtn" destination="JpH-PA-sU1" id="C3M-KP-71r"/>
+                        <outlet property="segment" destination="psR-cc-7KB" id="4kI-EE-3YH"/>
                         <outlet property="typeImageViewCL" destination="rEV-L2-URK" id="6kl-q2-s6m"/>
                         <outlet property="typeImageViewOC" destination="8v1-gN-jl2" id="Jcg-We-amA"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75" y="682"/>
         </scene>
     </scenes>
     <resources>

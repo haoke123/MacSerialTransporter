@@ -30,7 +30,7 @@
 "Olw-nP-bQN.title" = "Hide SMBIOSTransporter";
 
 /* Class = "NSButtonCell"; title = "转换"; ObjectID = "P4n-pQ-vdk"; */
-"P4n-pQ-vdk.title" = "Run";
+"P4n-pQ-vdk.title" = "Copy";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "Hide Others";

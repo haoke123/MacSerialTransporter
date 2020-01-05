@@ -12,9 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger,ConfigType) {
     ConfigTypeClover   = 0,
     ConfigTypeOpenCore = 1,
-    ConfigTypeOther    = 2,
+    ConfigTypeLocal    = 2,
+    ConfigTypeOther    = 3,
     ConfigTypeError    = -1,
 };
+@interface NSData (StringValue)
+- (NSString *) stringValue;
+@end
+
 @interface HKConfigUtility : NSObject
 @property (nonatomic,readonly,assign) ConfigType type;
 @property (nonatomic,readonly,copy)   NSString * MLB;
@@ -25,8 +30,9 @@ typedef NS_ENUM(NSInteger,ConfigType) {
 @property (nonatomic,readonly,strong) NSURL    * URL;
 @property (nonatomic,readonly,strong) NSDictionary * data;
 @property (nonatomic,readonly,copy)   NSString     * desString;
-- (instancetype) initWithURL:(NSURL *) URL;
+- (instancetype) initWithURL:(nullable NSURL * ) URL;
 - (void)changeSMBIOSCodeWithConfig:(HKConfigUtility *) config withCompleteHandler:(void (^)(BOOL isSuccess)) handler;
+
 @end
 
 NS_ASSUME_NONNULL_END
