@@ -130,6 +130,7 @@
     [alert setInformativeText:@"以什么身份打开该文件？"];
     [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
         NSLog(@"returnCode:%ld",returnCode);
+        if(returnCode < 1002)
         [weakSelf dragviewDidGetFileWithURL:fileURL withType:returnCode %1000 ==0 ?1:0];
     }];
 }
