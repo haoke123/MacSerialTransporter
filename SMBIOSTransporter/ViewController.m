@@ -10,9 +10,6 @@
 #import "HKDragView.h"
 #import "SMBIOSKey_F.h"
 #import "HKConfigUtility.h"
-#import "HKIORegPropertyTool.h"
-#include <IOKit/IOBSD.h>
-#include <IOKit/IOKitLib.h>
 @interface ViewController ()<HKDragViewDelegate,NSWindowDelegate>
 @property (nonatomic,weak) IBOutlet HKDragView  * drapDropImageViewCL;
 @property (nonatomic,weak) IBOutlet HKDragView  * drapDropImageViewOC;
@@ -46,6 +43,7 @@
         [self.segment setHidden:YES];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reopen) name:@"reopen" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openFile:) name:@"openFile" object:nil];
 }
 - (void) segmentChangeValue:(NSSegmentedControl *) seg{
     NSImageView * dgView = self.typeImageViewCL;
@@ -61,7 +59,6 @@
             }else{
                 [dgView setImage:[NSImage imageNamed:@"icon-local"]];
             }
-            
         }else{
             [dgView setImage:nil];
             
@@ -76,6 +73,10 @@
     HKConfigUtility * config = nil;
     if(url){
        config = [[HKConfigUtility alloc] initWithURL:url];
+        if(config.type == ConfigTypeError||config.type == ConfigTypeOther){
+            [self alertMsgWithTitle:@"确定" andMsg:@"不能识别的配置类型"];
+            return;
+        }
         
     }else{
         [self segmentChangeValue:self.segment];
@@ -116,7 +117,22 @@
 - (void)reopen{
     [self.view.window makeKeyAndOrderFront:self];
 }
-
+- (void)openFile:(NSNotification *) noti{
+    
+   [self.view.window makeKeyAndOrderFront:self];
+    NSURL * fileURL = noti.object;
+    __weak typeof(self) weakSelf = self;
+    NSAlert * alert = [[NSAlert alloc] init];
+    alert.messageText = @"打开配置文件";
+    [alert addButtonWithTitle:@"作为目标文件"];
+    [alert addButtonWithTitle:@"作为源文件"];
+    [alert addButtonWithTitle:@"取消"];
+    [alert setInformativeText:@"以什么身份打开该文件？"];
+    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+        NSLog(@"returnCode:%ld",returnCode);
+        [weakSelf dragviewDidGetFileWithURL:fileURL withType:returnCode %1000 ==0 ?1:0];
+    }];
+}
 - (IBAction)runAction:(NSButton *)sender {
     
     NSString * alertMsg = nil;
@@ -141,8 +157,6 @@
     [self.oConfig changeSMBIOSCodeWithConfig:self.segment.selectedSegment? self.cConfig:self.localConfig withCompleteHandler:^(BOOL isSuccess) {
         NSLog(@"转移成功：%@",isSuccess?@"是":@"否");
         [weakself alertMsgWithTitle:@"三码复制成功" andMsg:[NSString stringWithFormat:@"三码已从%@复制到%@",weakself.segment.selectedSegment? weakself.cConfig.desString:weakself.localConfig.desString,weakself.oConfig.desString]];
-
-        
     }];
 }
 - (void)alertMsgWithTitle:(NSString *) alertTitle andMsg:(NSString *) alertMsg{

@@ -307,6 +307,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMBIOSTransporter/SMBIOSTransporter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.01;
 				DEVELOPMENT_TEAM = WH5VP32KCY;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = SMBIOSTransporter/Info.plist;
@@ -314,6 +315,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = hk.MacSerialTransporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -326,6 +328,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMBIOSTransporter/SMBIOSTransporter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.01;
 				DEVELOPMENT_TEAM = WH5VP32KCY;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = SMBIOSTransporter/Info.plist;
@@ -333,6 +336,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = hk.MacSerialTransporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

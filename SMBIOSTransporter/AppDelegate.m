@@ -36,5 +36,6 @@
 -(void)application:(NSApplication *)application openURLs:(NSArray<NSURL *> *)urls{
     
     NSLog(@"urls : %@",urls);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"openFile" object:urls.lastObject];
 }
 @end
