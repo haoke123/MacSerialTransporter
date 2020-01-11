@@ -33,5 +33,8 @@
         return YES;
     }
 }
-
+-(void)application:(NSApplication *)application openURLs:(NSArray<NSURL *> *)urls{
+    
+    NSLog(@"urls : %@",urls);
+}
 @end

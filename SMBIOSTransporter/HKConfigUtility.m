@@ -122,7 +122,11 @@
     if (getIORegProperties(@"IODeviceTree:/efi/platform", &efiPlatformDictionary))
     {
         NSMutableData *systemIDData = [efiPlatformDictionary objectForKey:@"system-id"];
-        NSString * system_id = [systemIDData stringValue];
+        NSMutableString * system_id = [systemIDData stringValue].mutableCopy;
+        [system_id insertString:@"-" atIndex:20];
+        [system_id insertString:@"-" atIndex:16];
+        [system_id insertString:@"-" atIndex:12];
+        [system_id insertString:@"-" atIndex:8];
         _CustomUUID = system_id;
 
     }
@@ -172,4 +176,5 @@
     return hexStr;
 }
 @end
+
 
