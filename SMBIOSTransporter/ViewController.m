@@ -10,7 +10,10 @@
 #import "HKDragView.h"
 #import "SMBIOSKey_F.h"
 #import "HKConfigUtility.h"
-@interface ViewController ()<HKDragViewDelegate,NSWindowDelegate>
+#import "BDDiskArbitrationSession.h"
+#import "BDDisk.h"
+#import "HKIORegPropertyTool.h"
+@interface ViewController ()<HKDragViewDelegate,NSWindowDelegate,BDDiskArbitrationSessionDelegate>
 @property (nonatomic,weak) IBOutlet HKDragView  * drapDropImageViewCL;
 @property (nonatomic,weak) IBOutlet HKDragView  * drapDropImageViewOC;
 @property (nonatomic,weak) IBOutlet NSButton    * runBtn;
@@ -18,13 +21,20 @@
 @property (nonatomic,weak) IBOutlet NSImageView * bgImageViewOC;
 @property (nonatomic,weak) IBOutlet NSImageView * typeImageViewOC;
 @property (nonatomic,weak) IBOutlet NSImageView * typeImageViewCL;
+@property (weak) IBOutlet NSTextField *productModel;
 @property (nonatomic,weak) IBOutlet NSTextField * MLBLabel;
 @property (nonatomic,weak) IBOutlet NSTextField * ROMLabel;
 @property (nonatomic,weak) IBOutlet NSTextField * SNLabel;
 @property (nonatomic,strong) HKConfigUtility * oConfig;
 @property (nonatomic,strong) HKConfigUtility * cConfig;
 @property (nonatomic,strong) HKConfigUtility * localConfig;
+@property (nonatomic,strong) BDDiskArbitrationSession * diskSession;
+@property (weak) IBOutlet NSButton *diskOpenBtn;
+@property (weak) IBOutlet NSButton *diskMountBtn;
+@property (nonatomic,strong) NSMutableArray * allDisks;
 @property (weak) IBOutlet NSSegmentedControl *segment;
+@property (weak) IBOutlet NSPopUpButton *diskEFIButton;
+@property (nonatomic,assign) BOOL isFirstLoad;
 @end
 
 @implementation ViewController
@@ -35,13 +45,21 @@
     [self.drapDropImageViewOC setType:1];
     [self.drapDropImageViewCL setDelegate:self];
     [self.drapDropImageViewOC setDelegate:self];
+    NSString * productModel = nil;
+    if (getIORegString(@"IOPlatformExpertDevice", @"model", &productModel))
+        self.productModel.stringValue = productModel;
     self.localConfig = [[HKConfigUtility alloc] initWithURL:nil];
+    
+    
     if(self.localConfig.type == ConfigTypeLocal){
         [self dragviewDidGetFileWithURL:nil withType:0];
         [self.segment setAction:@selector(segmentChangeValue:)];
     }else{
         [self.segment setHidden:YES];
     }
+    [self.diskEFIButton setTitle:@"--"];
+    [self.diskEFIButton setAction:@selector(efiSelect:)];
+    self.diskSession = [[BDDiskArbitrationSession alloc] initWithDelegate:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reopen) name:@"reopen" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openFile:) name:@"openFile" object:nil];
 }
@@ -110,9 +128,9 @@
     }
 }
 - (void)changeTextWithConfig:(HKConfigUtility *) config{
-    self.MLBLabel.stringValue = [NSString stringWithFormat:@"MLB: %@",config.MLB?:@" <xxxxxxxxxxxxx>"];
-    self.ROMLabel.stringValue = [NSString stringWithFormat:@"ROM: %@",config.ROMValue?:@" <xxxxxxxxxxxx>"];
-    self.SNLabel.stringValue = [NSString stringWithFormat:@"SerialNumber: %@",config.SerialNumber?:@"<xxxxxxxxxxxx>"];
+    self.MLBLabel.stringValue = [NSString stringWithFormat:@"MLB: %@",config.MLB?:@" <XXXXXXXXXXXX>"];
+    self.ROMLabel.stringValue = [NSString stringWithFormat:@"ROM: %@",config.ROMValue?:@" <XXXXXXXXXXXX>"];
+    self.SNLabel.stringValue = [NSString stringWithFormat:@"SerialNumber: %@",config.SerialNumber?:@"<XXXXXXXXXXXX>"];
 }
 - (void)reopen{
     [self.view.window makeKeyAndOrderFront:self];
@@ -169,11 +187,93 @@
         
     }];
 }
-- (void)setRepresentedObject:(id)representedObject {
-    [super setRepresentedObject:representedObject];
 
-    // Update the view, if already loaded.
+- (void) diskDidAppear:(BDDisk *)disk{
+    if([disk.mediaName isEqualToString:@"EFI System Partition"]){
+        [self.allDisks addObject:disk];
+        [self.diskEFIButton addItemWithTitle:[self resumString:[disk.diskDescription objectForKey:@"DADeviceModel"]]];
+        if(!_isFirstLoad){
+            _isFirstLoad = YES;
+            [self checkDiskStatus:disk];
+        }
+    }
+    
+    
 }
-
+- (void) diskDidDisappear:(BDDisk *)disk{
+    if([disk.mediaName isEqualToString:@"EFI System Partition"]){
+        [self.allDisks removeObject:disk];
+        [self.diskEFIButton removeItemWithTitle:[self resumString:[disk.diskDescription objectForKey:@"DADeviceModel"]]];
+    }
+}
+- (void) diskDiskUpdate{
+    NSMutableArray * tarArr = [[NSMutableArray alloc] init];
+    for (BDDisk * disk in self.allDisks) {
+        BDDisk * disk2 = [self.diskSession diskForBSDName:disk.BSDName];
+        [tarArr addObject:disk2];
+    }
+    [self.allDisks removeAllObjects];
+    self.allDisks = nil;
+    self.allDisks = tarArr;
+   NSInteger currentIndex = [self.diskEFIButton indexOfSelectedItem];
+    if(currentIndex < self.allDisks.count){
+        [self checkDiskStatus:self.allDisks[currentIndex]];
+    }else{
+        [self.diskEFIButton selectItemAtIndex:0];
+        [self checkDiskStatus:self.allDisks.firstObject];
+    }
+}
+- (void) efiSelect:(NSPopUpButton *)popBtn{
+    
+    NSInteger index = popBtn.indexOfSelectedItem;
+    BDDisk * disk = self.allDisks[index];
+    [self checkDiskStatus:disk];
+    
+    
+}
+- (void) checkDiskStatus:(BDDisk *) disk{
+    
+    [self.diskMountBtn setTitle:disk.isMounted?@"卸载":@"挂载"];
+    [self.diskOpenBtn setEnabled:disk.isMounted];
+}
+- (NSMutableArray *) allDisks{
+    if(_allDisks == nil){
+        _allDisks = [[NSMutableArray alloc] init];
+    }
+    return _allDisks;
+}
+- (NSString *) resumString:(NSString *) deviceModel{
+    
+    NSArray * arr = [deviceModel componentsSeparatedByString:@" "];
+    
+    if(arr.count){
+        return [arr componentsJoinedByString:@" "];
+    }else{
+        return deviceModel;
+    }
+    
+}
+- (IBAction)openDisk:(id)sender {
+    BDDisk * currentDisk = [self.allDisks objectAtIndex:self.diskEFIButton.indexOfSelectedItem];
+    NSLog(@"currentDisk:%@",[currentDisk.diskDescription objectForKey:@"DADeviceModel"]);
+    if (currentDisk.volumePath == nil)
+        return;
+    
+    NSArray *fileURLs = [NSArray arrayWithObjects:currentDisk.volumePath, nil];
+    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:fileURLs];
+}
+- (IBAction)mountDisk:(id)sender {
+    BDDisk * currentDisk = [self.allDisks objectAtIndex:self.diskEFIButton.indexOfSelectedItem];
+    if(currentDisk.isMounted){
+        [currentDisk unmountWithCompletionHandler:^(NSError *error) {
+            
+        }];
+    }else{
+        [currentDisk mountWithCompletionHandler:^(NSURL *mountURL, NSError *error) {
+            
+        }];
+    }
+    NSLog(@"currentDisk:%@",[currentDisk.diskDescription objectForKey:@"DADeviceModel"]);
+}
 @end
 

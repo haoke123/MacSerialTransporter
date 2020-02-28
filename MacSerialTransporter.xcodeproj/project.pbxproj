@@ -15,6 +15,9 @@
 		7A03AA9523BE9923007E9800 /* HKDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A03AA9423BE9923007E9800 /* HKDragView.m */; };
 		7A2F337A23C0813400CF4288 /* SMBIOSKey_F.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2F337823C0813400CF4288 /* SMBIOSKey_F.m */; };
 		7A2F337D23C081F900CF4288 /* HKConfigUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2F337C23C081F900CF4288 /* HKConfigUtility.m */; };
+		7A522022240841E600DCDBE1 /* BDDisk.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A52201E240841E600DCDBE1 /* BDDisk.m */; };
+		7A522023240841E600DCDBE1 /* BDDiskArbitrationSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A52201F240841E600DCDBE1 /* BDDiskArbitrationSession.m */; };
+		7A5220262408420500DCDBE1 /* DiskArbitration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5220252408420500DCDBE1 /* DiskArbitration.framework */; };
 		7ACAC8F423C2661300D406FF /* HKIORegPropertyTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACAC8F223C2661200D406FF /* HKIORegPropertyTool.m */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +40,11 @@
 		7A2F337C23C081F900CF4288 /* HKConfigUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HKConfigUtility.m; sourceTree = "<group>"; };
 		7A2F338123C0C93700CF4288 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		7A2F338223C0C9CD00CF4288 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Main.strings"; sourceTree = "<group>"; };
+		7A52201E240841E600DCDBE1 /* BDDisk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDDisk.m; sourceTree = "<group>"; };
+		7A52201F240841E600DCDBE1 /* BDDiskArbitrationSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDDiskArbitrationSession.m; sourceTree = "<group>"; };
+		7A522020240841E600DCDBE1 /* BDDiskArbitrationSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDDiskArbitrationSession.h; sourceTree = "<group>"; };
+		7A522021240841E600DCDBE1 /* BDDisk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDDisk.h; sourceTree = "<group>"; };
+		7A5220252408420500DCDBE1 /* DiskArbitration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiskArbitration.framework; path = System/Library/Frameworks/DiskArbitration.framework; sourceTree = SDKROOT; };
 		7ACAC8F223C2661200D406FF /* HKIORegPropertyTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKIORegPropertyTool.m; sourceTree = "<group>"; };
 		7ACAC8F323C2661200D406FF /* HKIORegPropertyTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKIORegPropertyTool.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -46,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A5220262408420500DCDBE1 /* DiskArbitration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,8 +64,10 @@
 		7A03AA7323BE9769007E9800 = {
 			isa = PBXGroup;
 			children = (
+				7A52201D240841D600DCDBE1 /* DiskMounter */,
 				7A03AA7E23BE9769007E9800 /* SMBIOSTransporter */,
 				7A03AA7D23BE9769007E9800 /* Products */,
+				7A5220242408420500DCDBE1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +101,25 @@
 				7A03AA8D23BE976A007E9800 /* SMBIOSTransporter.entitlements */,
 			);
 			path = SMBIOSTransporter;
+			sourceTree = "<group>";
+		};
+		7A52201D240841D600DCDBE1 /* DiskMounter */ = {
+			isa = PBXGroup;
+			children = (
+				7A522021240841E600DCDBE1 /* BDDisk.h */,
+				7A52201E240841E600DCDBE1 /* BDDisk.m */,
+				7A522020240841E600DCDBE1 /* BDDiskArbitrationSession.h */,
+				7A52201F240841E600DCDBE1 /* BDDiskArbitrationSession.m */,
+			);
+			path = DiskMounter;
+			sourceTree = "<group>";
+		};
+		7A5220242408420500DCDBE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A5220252408420500DCDBE1 /* DiskArbitration.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,7 +197,9 @@
 				7A03AA8423BE9769007E9800 /* ViewController.m in Sources */,
 				7A03AA8C23BE976A007E9800 /* main.m in Sources */,
 				7A2F337D23C081F900CF4288 /* HKConfigUtility.m in Sources */,
+				7A522022240841E600DCDBE1 /* BDDisk.m in Sources */,
 				7A03AA8123BE9769007E9800 /* AppDelegate.m in Sources */,
+				7A522023240841E600DCDBE1 /* BDDiskArbitrationSession.m in Sources */,
 				7A03AA9523BE9923007E9800 /* HKDragView.m in Sources */,
 				7ACAC8F423C2661300D406FF /* HKIORegPropertyTool.m in Sources */,
 			);

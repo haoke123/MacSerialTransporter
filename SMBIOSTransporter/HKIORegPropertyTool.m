@@ -41,6 +41,35 @@ bool getIORegProperty(NSString *path, NSString *propertyName, CFTypeRef *propert
     
     return (*property != nil);
 }
+bool getIORegString(NSString *service, NSString *name, NSString **value)
+{
+    io_service_t ioService = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching([service UTF8String]));
+    
+    if (!ioService)
+        return false;
+    
+    CFTypeRef data = IORegistryEntryCreateCFProperty(ioService, (__bridge CFStringRef)name, kCFAllocatorDefault, 0);
+    
+    IOObjectRelease(ioService);
+    
+    if (data == nil)
+        return false;
+    
+    CFTypeID type = CFGetTypeID(data);
+    
+    if (type == CFStringGetTypeID())
+    {
+        *value = (__bridge NSString *)data;
+        
+        return true;
+    }
+    else if (type == CFDataGetTypeID())
+        *value = [NSString stringWithUTF8String:(const char *)[(__bridge NSData *)data bytes]];
+    
+    CFRelease(data);
+    
+    return true;
+}
 NSString *properyToString(id value)
 {
     if (value == nil)

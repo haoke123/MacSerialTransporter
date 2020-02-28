@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger,ConfigType) {
 
 @interface HKConfigUtility : NSObject
 @property (nonatomic,readonly,assign) ConfigType type;
+@property (nonatomic,readonly,copy)   NSString * productModel;
 @property (nonatomic,readonly,copy)   NSString * MLB;
 @property (nonatomic,readonly,strong) NSData   * ROM;
 @property (nonatomic,readonly,copy)   NSString * ROMValue;
