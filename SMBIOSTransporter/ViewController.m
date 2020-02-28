@@ -63,6 +63,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reopen) name:@"reopen" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openFile:) name:@"openFile" object:nil];
 }
+- (IBAction)helpBtnClick:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://suo.im/5JR7my"]];
+}
 - (void) segmentChangeValue:(NSSegmentedControl *) seg{
     NSImageView * dgView = self.typeImageViewCL;
     if(seg.selectedSegment == 0){
