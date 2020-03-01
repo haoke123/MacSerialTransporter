@@ -6,14 +6,14 @@
 //  Copyright © 2020 haoke. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MainViewController.h"
 #import "HKDragView.h"
 #import "SMBIOSKey_F.h"
 #import "HKConfigUtility.h"
 #import "BDDiskArbitrationSession.h"
 #import "BDDisk.h"
 #import "HKIORegPropertyTool.h"
-@interface ViewController ()<HKDragViewDelegate,NSWindowDelegate,BDDiskArbitrationSessionDelegate>
+@interface MainViewController ()<HKDragViewDelegate,NSWindowDelegate,BDDiskArbitrationSessionDelegate>
 @property (nonatomic,weak) IBOutlet HKDragView  * drapDropImageViewCL;
 @property (nonatomic,weak) IBOutlet HKDragView  * drapDropImageViewOC;
 @property (nonatomic,weak) IBOutlet NSButton    * runBtn;
@@ -37,7 +37,7 @@
 @property (nonatomic,assign) BOOL isFirstLoad;
 @end
 
-@implementation ViewController
+@implementation MainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,7 +49,6 @@
     if (getIORegString(@"IOPlatformExpertDevice", @"model", &productModel))
         self.productModel.stringValue = productModel;
     self.localConfig = [[HKConfigUtility alloc] initWithURL:nil];
-    
     
     if(self.localConfig.type == ConfigTypeLocal){
         [self dragviewDidGetFileWithURL:nil withType:0];
@@ -198,10 +197,9 @@
         if(!_isFirstLoad){
             _isFirstLoad = YES;
             [self checkDiskStatus:disk];
+            
         }
     }
-    
-    
 }
 - (void) diskDidDisappear:(BDDisk *)disk{
     if([disk.mediaName isEqualToString:@"EFI System Partition"]){

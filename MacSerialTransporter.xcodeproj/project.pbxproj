@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7A03AA8123BE9769007E9800 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A03AA8023BE9769007E9800 /* AppDelegate.m */; };
-		7A03AA8423BE9769007E9800 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A03AA8323BE9769007E9800 /* ViewController.m */; };
+		7A03AA8423BE9769007E9800 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A03AA8323BE9769007E9800 /* MainViewController.m */; };
 		7A03AA8623BE976A007E9800 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A03AA8523BE976A007E9800 /* Assets.xcassets */; };
 		7A03AA8923BE976A007E9800 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A03AA8723BE976A007E9800 /* Main.storyboard */; };
 		7A03AA8C23BE976A007E9800 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A03AA8B23BE976A007E9800 /* main.m */; };
@@ -25,8 +25,8 @@
 		7A03AA7C23BE9769007E9800 /* MacSerialTransporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacSerialTransporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A03AA7F23BE9769007E9800 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7A03AA8023BE9769007E9800 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7A03AA8223BE9769007E9800 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7A03AA8323BE9769007E9800 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7A03AA8223BE9769007E9800 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		7A03AA8323BE9769007E9800 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7A03AA8523BE976A007E9800 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A03AA8823BE976A007E9800 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7A03AA8A23BE976A007E9800 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,8 +84,8 @@
 			children = (
 				7A03AA7F23BE9769007E9800 /* AppDelegate.h */,
 				7A03AA8023BE9769007E9800 /* AppDelegate.m */,
-				7A03AA8223BE9769007E9800 /* ViewController.h */,
-				7A03AA8323BE9769007E9800 /* ViewController.m */,
+				7A03AA8223BE9769007E9800 /* MainViewController.h */,
+				7A03AA8323BE9769007E9800 /* MainViewController.m */,
 				7A03AA9323BE9923007E9800 /* HKDragView.h */,
 				7A03AA9423BE9923007E9800 /* HKDragView.m */,
 				7A2F337B23C081F900CF4288 /* HKConfigUtility.h */,
@@ -194,7 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A2F337A23C0813400CF4288 /* SMBIOSKey_F.m in Sources */,
-				7A03AA8423BE9769007E9800 /* ViewController.m in Sources */,
+				7A03AA8423BE9769007E9800 /* MainViewController.m in Sources */,
 				7A03AA8C23BE976A007E9800 /* main.m in Sources */,
 				7A2F337D23C081F900CF4288 /* HKConfigUtility.m in Sources */,
 				7A522022240841E600DCDBE1 /* BDDisk.m in Sources */,

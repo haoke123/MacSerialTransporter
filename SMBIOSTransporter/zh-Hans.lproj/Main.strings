@@ -39,10 +39,10 @@
 "YFR-Jw-GYK.title" = "ROM:";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
-"hz9-B4-Xy5.title" = "Services";
+"hz9-B4-Xy5.title" = "服务";
 
 /* Class = "NSTextFieldCell"; title = "SerialNumber:"; ObjectID = "oMb-Nq-0Lt"; */
 "oMb-Nq-0Lt.title" = "SerialNumber:";
 
 /* Class = "NSMenu"; title = "SMBIOSTransporter"; ObjectID = "uQy-DD-JDr"; */
-"uQy-DD-JDr.title" = "SMBIOSTransporter";
+"uQy-DD-JDr.title" = "三码迁移";
