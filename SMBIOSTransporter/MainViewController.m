@@ -63,7 +63,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openFile:) name:@"openFile" object:nil];
 }
 - (IBAction)helpBtnClick:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://suo.im/5JR7my"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://dwz.win/6me"]];
 }
 - (void) segmentChangeValue:(NSSegmentedControl *) seg{
     NSImageView * dgView = self.typeImageViewCL;
@@ -200,6 +200,8 @@
             
         }
     }
+    
+    NSLog(@"磁盘：%@\npart:%@",[self resumString:[disk.diskDescription objectForKey:@"DADeviceModel"]],disk.mediaName);
 }
 - (void) diskDidDisappear:(BDDisk *)disk{
     if([disk.mediaName isEqualToString:@"EFI System Partition"]){
