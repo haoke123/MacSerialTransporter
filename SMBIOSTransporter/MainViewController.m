@@ -191,7 +191,7 @@
 }
 
 - (void) diskDidAppear:(BDDisk *)disk{
-    if([disk.mediaName isEqualToString:@"EFI System Partition"]){
+    if([disk.mediaName.lowercaseString isEqualToString:@"efi system partition"]){
         [self.allDisks addObject:disk];
         [self.diskEFIButton addItemWithTitle:[self resumString:[disk.diskDescription objectForKey:@"DADeviceModel"]]];
         if(!_isFirstLoad){
@@ -204,7 +204,7 @@
     NSLog(@"磁盘：%@\npart:%@",[self resumString:[disk.diskDescription objectForKey:@"DADeviceModel"]],disk.mediaName);
 }
 - (void) diskDidDisappear:(BDDisk *)disk{
-    if([disk.mediaName isEqualToString:@"EFI System Partition"]){
+    if([disk.mediaName.lowercaseString isEqualToString:@"efi system partition"]){
         [self.allDisks removeObject:disk];
         [self.diskEFIButton removeItemWithTitle:[self resumString:[disk.diskDescription objectForKey:@"DADeviceModel"]]];
     }
